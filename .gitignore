@@ -1,2 +1,5 @@
 *.ipynb
 **/.ipynb_checkpoints/*
+.Rproj.user
+**/__pycache__/*
+
