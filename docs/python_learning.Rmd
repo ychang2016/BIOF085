@@ -1,0 +1,341 @@
+---
+jupyter:
+  jupytext:
+    formats: ipynb,py:percent,Rmd
+    text_representation:
+      extension: .Rmd
+      format_name: rmarkdown
+      format_version: '1.2'
+      jupytext_version: 1.4.2
+  kernelspec:
+    display_name: Python 3
+    language: python
+    name: python3
+---
+
+# Machine Learning using Python
+
+## Scikit-learn
+
+Scikit-learn (`sklearn`) is the main Python package for machine learning. It is a widely-used and well-regarded package. However, there are a couple of challenges to using it given the usual `pandas`-based data munging pipeline. 
+
+1. `sklearn` requires that all inputs be numeric, and in fact, `numpy` arrays.
+1. `sklearn` requires that all categorical variables by replaced by 0/1 dummy variables
+1. `sklearn` requires us to separate the predictors from the outcome. We need to have one `X` matrix for the predictors and one `y` vector for the outcome.
+
+The big issue, of course, is the first point. Given we used `pandas` precisely because we wanted to be able to keep heterogenous data. We have to be able to convert non-numeric data to numeric. `pandas` does help us out with this problem. First of 
+all, we know that all `pandas` Series and DataFrame objects can be converted to `numpy` arrays using the `value` or `to_numpy` functions. Second, we can easily extract a single variable from the data set using either the usual extracton methods or the 
+`pop` function. Third, `pandas` gives us a way to convert all categorical values to numeric dummy variables using the `get_dummies` function. This is actually a more desirable solution than what you will see in cyberspace, which is to use the 
+`OneHotEncoder` function from `sklearn`. If the outcome variable is not numeric, we can `LabelEncoder` function from the `sklearn.preprocessing` submodule.
+
+I just threw a bunch of jargon at you. Let's see what this means.
+
+### Transforming the outcome/target
+
+```{python}
+import numpy as np
+import pandas as pd
+import sklearn
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+iris = pd.read_csv('data/iris.csv')
+iris.head()
+
+```
+
+Let's hit the first issue first. We need to separate out the outcome (the variable we want to predict) from the predictors (in this case the sepal and petal measurements). 
+
+```{python}
+y = iris['species']
+X = iris.drop('species', axis = 1) # drops column, makes a copy
+```
+
+Another way to do this is 
+
+```{python}
+y = iris.pop('species')
+```
+
+If you look at this, `iris` now only has 4 columns. So we could just use `iris` after the `pop` application, as the predictor set
+
+
+We still have to update `y` to become numeric. This is where the `sklearn` functions start to be handy
+
+```{python}
+from sklearn.preprocessing import LabelEncoder
+le = LabelEncoder()
+y = le.fit_transform(y)
+y
+```
+
+Let's talk about this code, since it's very typical of the way the `sklearn`
+code works. First, we import a method (`LabelEncoder`) from the appropriate
+`sklearn` module. The second line, `le = LabelEncoder()` works to "turn on" the
+method. This is like taking a power tool off the shelf and plugging it in to a
+socket. It's now ready to work. The third line does the actual work.  The
+`fit_transform` function transforms the data you input into it based on the
+method it is then attached to.
+
+> Let's make a quick analogy. You can plug in both a power washer and a
+jackhammer to get them ready to go. You can then apply each of them to your
+driveway. They "transform" the driveway in different ways depending on which
+tool is used. The washer would "transform" the driveway by cleaning it, while
+the jackhammer would transform the driveway by breaking it.
+
+
+There's an interesting invisible quirk to the code, though. The object `le` also got transformed during this 
+process. There were pieces added to it during the `fit_transform` process. 
+
+```{python}
+le = LabelEncoder()
+d1 = dir(le)
+```
+
+```{python}
+y = le.fit_transform( pd.read_csv('data/iris.csv')['species'])
+d2 = dir(le)
+set(d2).difference(set(d1)) # set of things in d2 but not in d1
+```
+
+So we see that there is a new component added, called `classes_`. 
+
+```{python}
+le.classes_
+```
+
+So the original labels aren't destroyed; they are being stored. This can be useful.
+
+```{python}
+le.inverse_transform([0,1,1,2,0])
+```
+
+So we can transform back from the numeric to the labels. Keep this in hand, since it will prove useful after
+we have done some predictions using a ML model, which will give numeric predictions. 
+
+
+### Transforming the predictors
+
+Let's look at a second example. The `diamonds` dataset has several categorical variables that would need to be transformed. 
+
+```{python}
+diamonds = pd.read_csv('data/diamonds.csv.gz')
+
+y = diamonds.pop('price').values
+X = pd.get_dummies(diamonds)
+```
+
+```{python}
+type(X)
+```
+
+```{python}
+X.info()
+```
+
+So everything is now numeric!!. Let's take a peek inside.
+
+```{python}
+X.columns
+```
+
+So, it looks like the continuous variables remain intact, but the categorical variables got exploded out. Each
+variable name has a level with it, which represents the particular level it is representing. Each of these 
+variables, called dummy variables, are numerical 0/1 variables. For example, `color_F` is 1 for those diamonds which have color F, and 0 otherwise. 
+
+```{python}
+pd.crosstab(X['color_F'], diamonds['color'])
+```
+## The methods
+
+We mentioned a bunch of methods in the slides. Let's look at where they are in `sklearn`
+
+| ML method               | Code to call it                                              |
+| ----------------------- | ------------------------------------------------------------ |
+| Decision Tree           | `sklearn.tree.DecisionTreeClassifier`, `sklearn.tree.DecisionTreeRegressor` |
+| Random Forest           | `sklearn.ensemble.RandomForestClassifier`, `sklearn.ensemble.RandomForestRegressor` |
+| Linear Regression       | `sklearn.linear_model.LinearRegression`                      |
+| Logistic Regression     | `sklearn.linear_model.LogisticRegression`                    |
+| Support Vector Machines | `sklearn.svm.LinearSVC`, `sklearn.svm.LinearSVR`             |
+|                         |                                                              |
+
+
+The general method that the code will follow is :
+
+```
+from sklearn.... import Machine
+machine = Machine(*parameters*)
+machine.fit(X, y)
+```
+
+### A quick example
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+
+lm = LinearRegression()
+dt = DecisionTreeRegressor()
+```
+
+Lets manufacture some data
+
+```{python}
+x = np.linspace(0, 10, 200)
+y = 2 + 3*x - 5*(x**2)
+d = pd.DataFrame({'x': x})
+
+lm.fit(d,y)
+dt.fit(d, y)
+
+p1 = lm.predict(d)
+p2 = dt.predict(d)
+
+d['y'] = y
+d['lm'] = p1
+d['dt'] = p2
+
+D = pd.melt(d, id_vars = 'x')
+
+sns.relplot(data=D, x = 'x', y = 'value', hue = 'variable')
+plt.show()
+```
+
+
+## A data analytic example
+
+```{python}
+diamonds = pd.read_csv('data/diamonds.csv.gz')
+diamonds.info()
+```
+
+First, lets separate out the outcome (price) and the predictors
+
+```{python}
+y = diamonds.pop('price')
+```
+
+For many machine learning problems, it is useful to scale the numeric predictors so that they have mean 0 and 
+variance 1. First we need to separate out the categorical and numeric variables
+
+```{python}
+d1 = diamonds.select_dtypes(include = 'number')
+d2 = diamonds.select_dtypes(exclude = 'number')
+```
+
+Now let's scale the columns of `d1`
+
+```{python}
+from sklearn.preprocessing import scale
+
+bl = scale(d1)
+bl
+```
+
+Woops!! We get a `numpy` array, not a `DataFrame`!!
+
+```{python}
+bl = pd.DataFrame(scale(d1))
+bl.columns = list(d1.columns)
+d1 = bl
+```
+
+Now, let's recode the categorical variables into dummy variables.
+
+```{python}
+d2 = pd.get_dummies(d2)
+```
+
+and put them back together
+
+```{python}
+X = pd.concat([d1,d2], axis = 1)
+```
+
+Next we need to split the data into a training set and a test set. Usually we do this as an 80/20 split. 
+The purpose of the test set is to see how well the model works on an "external" data set. We don't touch the 
+test set until we're done with all our model building in the training set. We usually do the split using 
+random numbers. We'll put 40,000 observations in the training set.
+
+
+```{python}
+ind = list(X.index)
+np.random.shuffle(ind)
+
+X_train, y_train = X.loc[ind[:40000],:], y[ind[:40000]]
+X_test, y_test = X.loc[ind[40000:],:], y[ind[40000:]]
+
+```
+
+There is another way to do this
+
+```{python}
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y , test_size = 0.2, random_state= 40)
+```
+
+Now we will fit our models to the training data. Let's use a decision tree model, a random forest model, and a linear regression.
+
+```{python}
+from sklearn.linear_model import LinearRegression
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.ensemble import RandomForestRegressor
+
+lm = LinearRegression()
+dt = DecisionTreeRegressor()
+rf = RandomForestRegressor()
+
+```
+
+Now we will use our training data to fit the models
+
+```{python}
+lm.fit(X_train, y_train)
+dt.fit(X_train, y_train)
+rf.fit(X_train, y_train)
+
+```
+
+We now need to see how well the model fit the data. We'll use the R2 statistic to be our metric of choice to evaluate the model fit.
+
+```{python}
+from sklearn.metrics import  r2_score
+
+f"""
+Linear regression: {r2_score(y_train, lm.predict(X_train))}, 
+Decision tree: {r2_score(y_train, dt.predict(X_train))},
+Random Forest: {r2_score(y_train, rf.predict(X_train))}
+"""
+
+
+```
+
+This is pretty amazing. However, we know that if we try and predict using the same data we used to train 
+the model, we get better than expected results. One way to get a better idea about the true performance of the 
+model when we will try it on external data is to do cross-validation. 
+
+In cross-validation, we split the dataset up into 5  equal parts randomly. We then train the 
+model using 4 parts and predict the data on the 5th part. We do for all possible groups of 4 parts. We then 
+consider the overall performance of prediction. 
+
+```{python}
+from sklearn.model_selection import cross_val_score
+cv_score = cross_val_score(dt, X_train, y_train, cv=5)
+f"CV error = {np.mean(cv_score)}"
+```
+
+If we weren't satisfied with this performance, we could optimize the parameters of the decision tree to see 
+if we could improve performance. The way to do that would be to use `sklearn.model_selection.GridSearchCV`, giving
+it ranges of the parameters we want to optimize. For a decision tree these would be the maximum depth of the tree, the size of the smallest leaf, and the maximum number of features (predictors) to consider at each split. See `help(DecisionTreeRegressor)` for more details. 
+
+
+So how does this do on the test set?
+
+```{python}
+p = dt.predict(X_test)
+r2_score(y_test, p)
+```
+
+
+

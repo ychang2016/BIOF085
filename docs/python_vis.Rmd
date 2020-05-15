@@ -1,7 +1,7 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,py,Rmd
+    formats: ipynb,py:percent,Rmd
     text_representation:
       extension: .Rmd
       format_name: rmarkdown

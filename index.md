@@ -29,5 +29,24 @@ jupyter:
 
 ### Afternoon
 
-+ [An Introduction to `pandas` for data ingestion and munging](docs/python_pandas.md)
++ [An Introduction to `pandas` for data ingestion and munging](docs/python_pandas.Rmd)
 
+## Day Two
+
+### Morning
+
++ [Data visualization with Python](docs/python_vis.Rmd)
+
+### Afternoon
+
++ [Statistics with Python](docs/python_stat.Rmd)
+
+## Day Three
+
+### Morning
+
++ [Machine Learning with Python](docs/python_ml.Rmd)
+
+### Afternoon
+
++ [Applications](docs/python_appl.Rmd)

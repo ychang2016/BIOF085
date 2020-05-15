@@ -2,4 +2,6 @@
 **/.ipynb_checkpoints/*
 .Rproj.user
 **/__pycache__/*
+*.key
+docs/ML_Intro/*
 
