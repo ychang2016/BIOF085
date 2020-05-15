@@ -14,6 +14,24 @@
 #     name: python3
 # ---
 
+# %%
+# ---
+# jupyter:
+#   jupytext:
+#     cell_metadata_filter: -all
+#     formats: ipynb,py:percent,Rmd
+#     text_representation:
+#       extension: .py
+#       format_name: percent
+#       format_version: '1.3'
+#       jupytext_version: 1.4.2
+<<<<<<< HEAD
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
+
 # %% [markdown]
 # # String manipulation
 #
@@ -166,4 +184,3 @@ print("protein translation is %s" % my_seq.translate())
 # %% [markdown]
 # BioPython has capabilities for querying databases like `Entrez`, read sequences, do alignments using FASTA, and the like. 
 
-# %%
