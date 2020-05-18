@@ -13,6 +13,10 @@
 #     name: python3
 # ---
 
+# %% [markdown] toc=true
+# <h1>Table of Contents<span class="tocSkip"></span></h1>
+# <div class="toc"><ul class="toc-item"><li><span><a href="#Introduction" data-toc-modified-id="Introduction-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Introduction</a></span><ul class="toc-item"><li><span><a href="#An-example-gallery" data-toc-modified-id="An-example-gallery-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>An example gallery</a></span></li><li><span><a href="#Why-visualize-data?" data-toc-modified-id="Why-visualize-data?-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Why visualize data?</a></span></li><li><span><a href="#Conceptual-ideas" data-toc-modified-id="Conceptual-ideas-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>Conceptual ideas</a></span><ul class="toc-item"><li><span><a href="#Begin-with-the-consumer-in-mind" data-toc-modified-id="Begin-with-the-consumer-in-mind-1.3.1"><span class="toc-item-num">1.3.1&nbsp;&nbsp;</span>Begin with the consumer in mind</a></span></li><li><span><a href="#Tell-a-story" data-toc-modified-id="Tell-a-story-1.3.2"><span class="toc-item-num">1.3.2&nbsp;&nbsp;</span>Tell a story</a></span></li><li><span><a href="#A-matter-of-perception" data-toc-modified-id="A-matter-of-perception-1.3.3"><span class="toc-item-num">1.3.3&nbsp;&nbsp;</span>A matter of perception</a></span></li><li><span><a href="#Some-principles" data-toc-modified-id="Some-principles-1.3.4"><span class="toc-item-num">1.3.4&nbsp;&nbsp;</span>Some principles</a></span></li></ul></li></ul></li><li><span><a href="#Plotting-in-Python" data-toc-modified-id="Plotting-in-Python-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Plotting in Python</a></span><ul class="toc-item"><li><span><a href="#Static-plots" data-toc-modified-id="Static-plots-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Static plots</a></span></li><li><span><a href="#Dynamic-or-interactive-plots" data-toc-modified-id="Dynamic-or-interactive-plots-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Dynamic or interactive plots</a></span></li></ul></li><li><span><a href="#Univariate-plots" data-toc-modified-id="Univariate-plots-3"><span class="toc-item-num">3&nbsp;&nbsp;</span>Univariate plots</a></span><ul class="toc-item"><li><span><a href="#pandas" data-toc-modified-id="pandas-3.1"><span class="toc-item-num">3.1&nbsp;&nbsp;</span>pandas</a></span><ul class="toc-item"><li><span><a href="#Histogram" data-toc-modified-id="Histogram-3.1.1"><span class="toc-item-num">3.1.1&nbsp;&nbsp;</span>Histogram</a></span></li><li><span><a href="#Bar-plot" data-toc-modified-id="Bar-plot-3.1.2"><span class="toc-item-num">3.1.2&nbsp;&nbsp;</span>Bar plot</a></span></li><li><span><a href="#Density-plot" data-toc-modified-id="Density-plot-3.1.3"><span class="toc-item-num">3.1.3&nbsp;&nbsp;</span>Density plot</a></span></li></ul></li><li><span><a href="#seaborn" data-toc-modified-id="seaborn-3.2"><span class="toc-item-num">3.2&nbsp;&nbsp;</span>seaborn</a></span><ul class="toc-item"><li><span><a href="#Histogram" data-toc-modified-id="Histogram-3.2.1"><span class="toc-item-num">3.2.1&nbsp;&nbsp;</span>Histogram</a></span></li><li><span><a href="#Bar-plot" data-toc-modified-id="Bar-plot-3.2.2"><span class="toc-item-num">3.2.2&nbsp;&nbsp;</span>Bar plot</a></span></li><li><span><a href="#Density-plot" data-toc-modified-id="Density-plot-3.2.3"><span class="toc-item-num">3.2.3&nbsp;&nbsp;</span>Density plot</a></span></li></ul></li></ul></li><li><span><a href="#Bivariate-plots" data-toc-modified-id="Bivariate-plots-4"><span class="toc-item-num">4&nbsp;&nbsp;</span>Bivariate plots</a></span><ul class="toc-item"><li><span><a href="#pandas" data-toc-modified-id="pandas-4.1"><span class="toc-item-num">4.1&nbsp;&nbsp;</span>pandas</a></span><ul class="toc-item"><li><span><a href="#Scatter-plot" data-toc-modified-id="Scatter-plot-4.1.1"><span class="toc-item-num">4.1.1&nbsp;&nbsp;</span>Scatter plot</a></span></li><li><span><a href="#Box-plot" data-toc-modified-id="Box-plot-4.1.2"><span class="toc-item-num">4.1.2&nbsp;&nbsp;</span>Box plot</a></span></li></ul></li><li><span><a href="#seaborn" data-toc-modified-id="seaborn-4.2"><span class="toc-item-num">4.2&nbsp;&nbsp;</span>seaborn</a></span><ul class="toc-item"><li><span><a href="#Scatter-plot" data-toc-modified-id="Scatter-plot-4.2.1"><span class="toc-item-num">4.2.1&nbsp;&nbsp;</span>Scatter plot</a></span></li><li><span><a href="#Box-plot" data-toc-modified-id="Box-plot-4.2.2"><span class="toc-item-num">4.2.2&nbsp;&nbsp;</span>Box plot</a></span></li><li><span><a href="#Violin-plot" data-toc-modified-id="Violin-plot-4.2.3"><span class="toc-item-num">4.2.3&nbsp;&nbsp;</span>Violin plot</a></span></li><li><span><a href="#Barplot-(categorical-vs-continuous)" data-toc-modified-id="Barplot-(categorical-vs-continuous)-4.2.4"><span class="toc-item-num">4.2.4&nbsp;&nbsp;</span>Barplot (categorical vs continuous)</a></span></li><li><span><a href="#Joint-plot" data-toc-modified-id="Joint-plot-4.2.5"><span class="toc-item-num">4.2.5&nbsp;&nbsp;</span>Joint plot</a></span></li></ul></li></ul></li><li><span><a href="#Facets-and-multivariate-data" data-toc-modified-id="Facets-and-multivariate-data-5"><span class="toc-item-num">5&nbsp;&nbsp;</span>Facets and multivariate data</a></span><ul class="toc-item"><li><ul class="toc-item"><li><span><a href="#Scatter-plots-by-group" data-toc-modified-id="Scatter-plots-by-group-5.0.1"><span class="toc-item-num">5.0.1&nbsp;&nbsp;</span>Scatter plots by group</a></span></li></ul></li><li><span><a href="#Facets" data-toc-modified-id="Facets-5.1"><span class="toc-item-num">5.1&nbsp;&nbsp;</span>Facets</a></span></li><li><span><a href="#Pairs-plots" data-toc-modified-id="Pairs-plots-5.2"><span class="toc-item-num">5.2&nbsp;&nbsp;</span>Pairs plots</a></span></li></ul></li><li><span><a href="#Customizing-the-look" data-toc-modified-id="Customizing-the-look-6"><span class="toc-item-num">6&nbsp;&nbsp;</span>Customizing the look</a></span><ul class="toc-item"><li><span><a href="#Themes" data-toc-modified-id="Themes-6.1"><span class="toc-item-num">6.1&nbsp;&nbsp;</span>Themes</a></span></li></ul></li><li><span><a href="#Finer-control-with-matplotlib" data-toc-modified-id="Finer-control-with-matplotlib-7"><span class="toc-item-num">7&nbsp;&nbsp;</span>Finer control with matplotlib</a></span><ul class="toc-item"><li><span><a href="#Matlab-like-plotting" data-toc-modified-id="Matlab-like-plotting-7.1"><span class="toc-item-num">7.1&nbsp;&nbsp;</span>Matlab-like plotting</a></span></li></ul></li></ul></div>
+
 # %% [markdown]
 # # Data visualization using Python
 #
@@ -85,7 +89,8 @@
 # 4. Focus on the consumer
 #
 # > See [my slides](http://araastat.com/BIOF439/lectures/01-DataViz.pdf) for some more opinionated ideas
-#
+
+# %% [markdown]
 # ## Plotting in Python
 #
 # Let's take a very quick tour before we get into the weeds. We'll use the mtcars dataset as an exemplar dataset that we can import using `pandas`
@@ -135,6 +140,9 @@ from plotnine import *
 # There are several Python packages that wrap around Javascript plotting libraries that are so popular in web-based graphics like D3 and Vega. Three that deserve mention are `plotly`, `bokeh`, and `altair`.
 
 # %% [markdown]
+# > If you actually want to experience the interactivity of the plots, please use the "Live notebooks" link in Canvas to run these notebooks. Otherwise, you can download the notebooks from the GitHub site and run them on your own computer. 
+
+# %% [markdown]
 # `plotly` is a Python package developed by the company [Plot.ly](https://www.plotly.com) to interface with their interactive Javascript library either locally or via their web service. Plot.ly also develops an R package to interface with their products as well. It provides an intuitive syntax and ease of use, and is probably the more popular package for interactive graphics from both R and Python.
 
 # %%
@@ -178,9 +186,21 @@ alt.Chart(mtcars).mark_point().encode(
 # | plotly  | [Fundamentals](https://plotly.com/python/)                   |
 # | bokeh   | [Tutorial](https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb) |
 # | altair  | [Overview](https://altair-viz.github.io/getting_started/overview.html) |
-#
+
+# %% [markdown]
 # ## Univariate plots
 #
+# We will be introducing plotting and code from 3 modules: `matplotlib`, `seaborn` and `pandas`. As we go forth, you may ask the question, which one should I learn? Chris Moffitt has the following advice.
+#
+# A pathway to learning ([Chris Moffit](https://pbpython.com/effective-matplotlib.html))
+#
+# 1. Learn the basic matplotlib terminology, specifically what is a `Figure` and an `Axes` .
+# 2. Always use the object-oriented interface. Get in the habit of using it from the start of your analysis. (*not really getting into this, but basically don't use the Matlab form I'll show at the end, if you don't have to*)
+# 3. Start your visualizations with basic pandas plotting.
+# 4. Use seaborn for the more complex statistical visualizations.
+# 5. Use matplotlib to customize the pandas or seaborn visualization.
+
+# %% [markdown]
 # ### pandas
 #
 # #### Histogram
@@ -209,7 +229,7 @@ mtcars['mpg'].plot( kind = 'density');
 # #### Histogram
 
 # %%
-ax = sns.distplot(mtcars['mpg'], kde=False)
+ax = sns.distplot(mtcars['mpg'], kde=False);
 
 # %% [markdown]
 # #### Bar plot
@@ -220,13 +240,13 @@ sns.countplot(data = mtcars, x = 'cyl');
 # %%
 diamonds = pd.read_csv('data/diamonds.csv.gz')
 ordered_colors = ['E','F','G','H','I','J']
-sns.catplot(data = diamonds, x = 'color', kind = 'count', color = 'blue')
+sns.catplot(data = diamonds, x = 'color', kind = 'count', color = 'blue');
 
 # %% [markdown]
 # #### Density plot
 
 # %%
-sns.distplot(mtcars['mpg'], hist=False)
+sns.distplot(mtcars['mpg'], hist=False);
 
 # %% [markdown]
 # ## Bivariate plots
@@ -237,7 +257,7 @@ sns.distplot(mtcars['mpg'], hist=False)
 
 # %%
 diamonds = pd.read_csv('data/diamonds.csv.gz')
-diamonds.plot(x = 'carat', y = 'price', kind = 'scatter')
+diamonds.plot(x = 'carat', y = 'price', kind = 'scatter');
 
 # %% [markdown]
 # #### Box plot
@@ -251,31 +271,32 @@ diamonds.boxplot(column = 'price', by = 'color');
 # #### Scatter plot
 
 # %%
-sns.scatterplot(data = diamonds, x = 'carat', y = 'price')
+sns.scatterplot(data = diamonds, x = 'carat', y = 'price');
 
 # %% [markdown]
 # #### Box plot
 
 # %%
 ordered_color = ['E','F','G','H','I','J']
-sns.catplot(data = diamonds, x = 'color', y = 'price', order = ordered_color, color = 'blue', kind = 'box')
+sns.catplot(data = diamonds, x = 'color', y = 'price', 
+            order = ordered_color, color = 'blue', kind = 'box');
 
 # %% [markdown]
 # #### Violin plot
 
 # %%
-g = sns.catplot(data = diamonds, x = 'color', y = 'price', kind = 'violin', order = ordered_color);
+g = sns.catplot(data = diamonds, x = 'color', y = 'price', 
+                kind = 'violin', order = ordered_color);
 
 # %% [markdown]
 # #### Barplot (categorical vs continuous)
 
 # %%
 ordered_colors = ['D','E','F','G','H','I']
-sns.barplot(data = diamonds, x = 'color', y = 'price', order = ordered_colors)
+sns.barplot(data = diamonds, x = 'color', y = 'price', order = ordered_colors);
 
 # %%
-
-sns.barplot(data = diamonds, x = 'cut', y = 'price')
+sns.barplot(data = diamonds, x = 'cut', y = 'price');
 
 # %% [markdown]
 # #### Joint plot
@@ -287,33 +308,26 @@ sns.jointplot(data = diamonds, x = 'carat', y = 'price');
 sns.jointplot(data = diamonds, x = 'carat', y = 'price', kind = 'reg');
 
 # %%
-sns.jointplot(data = diamonds, x = 'carat', y = 'price', kind = 'hex')
-
-# %%
-fmri = sns.load_dataset('fmri')
-
-
-# %%
-plt.style.use('seaborn-notebook')
-sns.relplot(x = 'timepoint', y = 'signal', data = fmri)
-
-# %%
-sns.relplot(x = 'timepoint', y = 'signal', data = fmri, kind = 'line')
-
-# %%
-sns.relplot(x = 'timepoint', y = 'signal', data = fmri, kind = 'line', hue ='event')
-
-# %%
-sns.relplot(x = 'timepoint', y = 'signal', data = fmri, hue = 'region', style = 'event', kind = 'line')
-
-# %%
-
+sns.jointplot(data = diamonds, x = 'carat', y = 'price', kind = 'hex');
 # %% [markdown]
 # ## Facets and multivariate data
+#
+# The basic idea in this section is to see how we can visualize more than two variables at a time. We will see two strategies:
+#
+# 1. Put multiple graphs on the same frame, with each graph referring to a level of a 3rd variable
+# 1. Create a grid of separate graphs, with each graph referring to a level of a 3rd variable
+#
+# This strategy also can work any time we need to visualize the data corresponding to different levels of a variable, say by gender or race or country. 
+#
+# In this example we're going to start with 4 time series, labelled A, B, C, D. 
 
 # %%
 ts = pd.read_csv('data/ts.csv')
+ts.dt = pd.to_datetime(ts.dt) # convert this column to a datetime object
 ts.head()
+
+# %% [markdown]
+# For one strategy we will employ, it is actually a bit easier to change this to a wide data form, using `pivot`. 
 
 # %%
 dfp = ts.pivot(index = 'dt', columns = 'kind', values = 'value')
@@ -321,15 +335,66 @@ dfp.head()
 
 # %%
 fig, ax = plt.subplots()
-dfp.plot(ax=ax)
+dfp.plot(ax=ax);
+
+# %% [markdown]
+# This creates 4 separate time series plots, one for each of the columns labeled A, B, C and D. The x-axis is determined by `dfp.index`, which during the pivoting operation, we deemed was the values of `dt` in the original data. 
+
+# %% [markdown]
+# Using `seaborn`...
+
+# %%
+sns.lineplot(data = dfp);
+
+# %% [markdown]
+# However, we can achieve this same plot using the original data, and `seaborn`, in rather short order
+
+# %%
+sns.lineplot(data = ts, x = 'dt', y = 'value', hue = 'kind');
+
+# %% [markdown]
+# In this plot, assigning a variable to `hue` tells seaborn to draw lines (in this case) of different hues based on values of that variable. 
+#
+# We can use a bit more granular and explicit code for this as well. This allows us a bit more control of the plot.
 
 # %%
 g = sns.FacetGrid(ts, hue = 'kind', height = 5, aspect = 1.5)
 g.map(plt.plot, 'dt', 'value').add_legend()
 g.ax.set(xlabel = 'Date',
         ylabel = 'Value',
-        title = 'Time series')
+        title = 'Time series');
 
+## All of this code chunk needs to be run at one time, otherwise you get weird errors. This
+## is true for many plotting commands which are composed of multiple commands. 
+
+
+# %% [markdown]
+# The `FacetGrid` tells `seaborn` that we're going to layer graphs, with layers based on `hue` and the hues being determined by values of `kind`. Notice that we can add a few more details like the aspect ratio of the plot and so on. The documentation for [FacetGrid](https://seaborn.pydata.org/generated/seaborn.FacetGrid.html), which we will also use for facets below, may be helpful in finding all the options you can control.
+
+# %% [markdown]
+# We can also show more than one kind of layer on a single graph
+
+# %%
+fmri = sns.load_dataset('fmri')
+
+
+# %%
+plt.style.use('seaborn-notebook')
+sns.relplot(x = 'timepoint', y = 'signal', data = fmri);
+
+# %%
+sns.relplot(x = 'timepoint', y = 'signal', data = fmri, kind = 'line');
+
+# %%
+sns.relplot(x = 'timepoint', y = 'signal', data = fmri, kind = 'line', hue ='event');
+
+# %%
+sns.relplot(x = 'timepoint', y = 'signal', data = fmri, hue = 'region', 
+            style = 'event', kind = 'line');
+
+
+# %% [markdown]
+# Here we use color to show the region, and line style (solid vs dashed) to show the event.
 
 # %% [markdown]
 # #### Scatter plots by group
@@ -338,18 +403,24 @@ g.ax.set(xlabel = 'Date',
 g = sns.FacetGrid(diamonds, hue = 'color', height = 7.5)
 g.map(plt.scatter, 'carat', 'price').add_legend();
 
+# %% [markdown]
+# Notice that this arranges the colors and values for the `color` variable in random order. If we have a preferred order we can impose that using the option `hue_order`. 
+
 # %%
 clarity_ranking = ["I1", "SI2", "SI1", "VS2", "VS1", "VVS2", "VVS1", "IF"]
 sns.scatterplot(x="carat", y="price",
                 hue="clarity", size="depth",
-                palette="ch:r=-.2,d=.3_r",
                 hue_order=clarity_ranking,
                 sizes=(1, 8), linewidth=0,
-                data=diamonds, ax=ax)
+                data=diamonds);
 
 
 # %% [markdown]
-# #### Facets
+# ### Facets
+#
+# Facets or trellis graphics is a visualization method where we draw multiple plots in a grid, with each plot corresponding to unique values of a particular variable or combinations of variables. This has also been called *small multiples*. 
+#
+# We'll proceed with an example using the `iris` dataset.
 
 # %%
 iris = pd.read_csv('data/iris.csv')
@@ -357,12 +428,30 @@ iris.head()
 
 # %%
 g = sns.FacetGrid(iris, col = 'species', hue = 'species', height = 5)
-g.map(plt.scatter, 'sepal_width', 'sepal_length')
+g.map(plt.scatter, 'sepal_width', 'sepal_length').add_legend();
+
+# %% [markdown]
+# Here we use `FacetGrid` to indicate that we're creating multiple subplots by specifying the option `col` (for column). So this code says we are going to create one plot per level of species, arranged as separate columns (or in effect along one row). You could also specify `row` which would arrange the plots one to a row, or, in effect, in one column. 
+#
+# The `map` function says, take the facets I've defined and stored in `g`, and in each one, plot a scatter plot with `sepal_width` on the x-axis and `sepal_length` on the y-axis. 
+
+# %% [markdown]
+# We could also use `relplot` for a more compact solution.
+
+# %%
+sns.relplot(x = 'sepal_width', y = 'sepal_length', data = iris, 
+            col = 'species', hue = 'species');
+
+# %% [markdown]
+# A bit more of a complicated example, using the `fmri` data, where we're coloring lines based on the subject, and creating a 2-d grid, where region of the brain in along columns and event type is along rows. 
 
 # %%
 sns.relplot(x="timepoint", y="signal", hue="subject",
             col="region", row="event", height=3,
             kind="line", estimator=None, data=fmri);
+
+# %% [markdown]
+# In the following example, we want to show how each subject fares for each of the two events, just within the frontal region. We let `seaborn` figure out the layout, only specifying that we'll be going along rows ("by column") and also saying we'll wrap around to the beginning once we've got to 5 columns. Note we use the `query` function to filter the dataset. 
 
 # %%
 sns.relplot(x="timepoint", y="signal", hue="event", style="event",
@@ -370,67 +459,82 @@ sns.relplot(x="timepoint", y="signal", hue="event", style="event",
             height=3, aspect=.75, linewidth=2.5,
             kind="line", data=fmri.query("region == 'frontal'"));
 
+# %% [markdown]
+# In the following example we want to compare the distribution of price from the diamonds dataset by color, and so it makes sense to create density plots of the price distribution and stack them one below the next so we can visually compare them. 
+
 # %%
 ordered_colors = ['E','F','G','H','I','J']
-g = sns.FacetGrid(data = diamonds, row = 'color', height = 1.7, aspect = 4, row_order = ordered_colors)
-g.map(sns.distplot, 'price', hist = False, rug = True)
+g = sns.FacetGrid(data = diamonds, row = 'color', height = 1.7, 
+                  aspect = 4, row_order = ordered_colors)
+g.map(sns.kdeplot, 'price');
+
+# %% [markdown]
+# You need to use `FacetGrid` to create sets of univariate plots since there is no particular method that allows univariate plots over a grid like `relplot` for bivariate plots.
+
+# %% [markdown]
+# ### Pairs plots
+#
+# The pairs plot is a quick way to compare every pair of variables in a dataset (or at least, every pair of continuous variables) in a grid. You can specify what kind of univariate plot will be displayed on the diagonal locations on the grid, and which bivariate plots will be displayed on the off-diagonal locations. 
+
+# %%
+sns.pairplot(data=iris)
+
+# %% [markdown]
+# You can achieve more customization using `PairGrid`.
 
 # %%
 g = sns.PairGrid(iris, diag_sharey=False)
 g.map_upper(sns.scatterplot)
 g.map_lower(sns.kdeplot, colors="C0")
-g.map_diag(sns.kdeplot, lw=2)
+g.map_diag(sns.kdeplot, lw=2);
 
-
-# %%
-g = sns.PairGrid(iris, hue="species")
-g.map_diag(plt.hist)
-g.map_offdiag(plt.scatter)
-g.add_legend();
 
 # %% [markdown]
 # ## Customizing the look 
 
 # %% [markdown]
 # ### Themes
+#
+# There are several themes available in the modern `matplotlib`, some of which borrow from `seaborn`. You can see the available themes and play around. 
 
 # %%
 plt.style.available
 
+# %% [markdown]
+# See some examples below.
+
 # %%
 plt.style.use('fivethirtyeight')
-sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length')
+sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length');
 
 # %%
 plt.style.use('bmh')
-sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length')
+sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length');
 
 # %%
 plt.style.use('classic')
-sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length')
+sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length');
 
 # %%
 plt.style.use('ggplot')
-sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length')
+sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length');
 
 # %%
 plt.style.use('Solarize_Light2')
-sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length')
+sns.scatterplot(data = iris, x = 'sepal_width', y = 'sepal_length');
+
+# %% [markdown]
+# > One small syntax point. You may have noticed in your own work that you get a little annoying line in the output when you plot. You can prevent that from happening by putting a semi-colon (`;`) after the last plotting command
 
 # %% [markdown]
 # ## Finer control with matplotlib
 #
-# ![Matplotlib parts](graphs/matplotlib-anatomy.png)
-#
-# A pathway to learning ([Chris Moffit](https://pbpython.com/effective-matplotlib.html))
-#
-# 1. Learn the basic matplotlib terminology, specifically what is a `Figure` and an `Axes` .
-# 2. Always use the object-oriented interface. Get in the habit of using it from the start of your analysis.
-# 3. Start your visualizations with basic pandas plotting.
-# 4. Use seaborn for the more complex statistical visualizations.
-# 5. Use matplotlib to customize the pandas or seaborn visualization.
+# ![https://matplotlib.org/tutorials/introductory/usage.html#sphx-glr-tutorials-introductory-usage-py](graphs/matplotlib-anatomy.png)
 #
 #
+# As you can see from the figure, you can control each aspect of the plot displayed above using `matplotlib`. I won't go into the details, and will leave it to you to look at the `matplotlib` [documentation](https://matplotlib.org/contents.html) and [examples](https://matplotlib.org/gallery/index.html) if you need to customize at this level of granularity. 
+#
+# The following is an example using pure `matplotlib`. You can see how you can build up a plot. The crucial part here is that you need to run the code from each chunk together.  
 
 # %%
 from matplotlib.ticker import FuncFormatter
@@ -450,15 +554,17 @@ group_names = list(data.keys())
 group_mean = np.mean(group_data)
 
 # %%
+plt.style.use('default')
 fig, ax = plt.subplots()
 # %%
 fig, ax = plt.subplots()
-ax.barh(group_names, group_data)
+ax.barh(group_names, group_data);
 
 # %%
 fig, ax = plt.subplots()
 ax.barh(group_names, group_data)
-ax.set(xlim = [-10000, 140000], xlabel = 'Total Revenue', ylabel = 'Company', title = 'Company Revenue');
+ax.set(xlim = [-10000, 140000], xlabel = 'Total Revenue', ylabel = 'Company', 
+       title = 'Company Revenue');
 
 # %%
 fig, ax = plt.subplots(figsize=(8, 4))
@@ -468,14 +574,22 @@ plt.setp(labels, rotation=45, horizontalalignment='right')
 ax.set(xlim=[-10000, 140000], xlabel='Total Revenue', ylabel='Company',
        title='Company Revenue');
 
+# %% [markdown]
+# After you have created your figure, you do need to save it to disk so that you can use it in your Word or Markdown or PowerPoint document. You can see the formats available. 
+
 # %%
 fig.canvas.get_supported_filetypes()
 
+# %% [markdown]
+# The type will be determined by the ending of the file name. You can add some options depending on the type. I'm showing an example of saving the figure to a PNG file. Typically I'll save figures to a vector graphics format like PDF, and then convert into other formats, since that results in minimal resolution loss. You of course have the option to save to your favorite format.
+
 # %%
-# fig.savefig('sales.png', dpi = 300, bbox_inches = 'tight')
+# fig.savefig('sales.png', dpi = 300, bbox_inches = 'tight') 
 
 # %% [markdown]
 # ### Matlab-like plotting
+#
+# `matplotlib` was originally developed to emulate Matlab. Though this kind of syntax is no longer recommended, it is still available and may be of use to those coming to Python from Matlab or Octave. 
 
 # %%
 import matplotlib.pyplot as plt
@@ -508,3 +622,5 @@ plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
 plt.subplot(212)
 plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
 plt.show()
+
+# %%
