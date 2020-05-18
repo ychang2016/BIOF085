@@ -7,6 +7,8 @@
 #       format_name: percent
 #       format_version: '1.3'
 #       jupytext_version: 1.4.2
+#   kernel_info:
+#     name: python3
 #   kernelspec:
 #     display_name: Python 3
 #     language: python
@@ -29,19 +31,29 @@
 #
 # ### Python is a scripting language
 #
-# Using Python requires typing!! You write *code* in Python that is then interpreted by the Python interpreter to make the computer implement your instructions. Your code is like a recipe that you write for the computer. Python is a *high-level language* in that the code is English-like and human-readable and understandable, which reduces the time needed for a person to create the recipe. It is a language in that it has nouns (*variables* or *objects*), verbs (*functions*) and a structure or grammar that allows the programmer to write recipes for different functionalities.
+# Using Python requires typing!! You write *code* in Python that is then interpreted by the Python interpreter to make the computer implement your instructions. **Your code is like a recipe that you write for the computer**. Python is a *high-level language* in that the code is English-like and human-readable and understandable, which reduces the time needed for a person to create the recipe. It is a language in that it has nouns (*variables* or *objects*), verbs (*functions*) and a structure or grammar that allows the programmer to write recipes for different functionalities.
+#
+# One thing that is important to note in Python: **case is important!**. If we have two objects named `data` and `Data`, they will refer to different things. 
+#
+# Scripting can be frustrating in the beginning. You will find that the code you wrote doesn't work "for some reason", though it looks like you wrote it fine. The first things I look for, in order, are
+#
+# 1. Did I spell all the variables and functions correctly
+# 1. Did I close all the brackets I have opened
+# 1. Did I finish all the quotes I started, and paired single- and double-quotes
+# 1. Did I already import the right module for the function I'm trying to use. 
+#
+# These may not make sense right now, but as we go into Python, I hope you will remember these to help debug your code. 
 #
 # ## An example
 #
 # Let's consider the following piece of Python code:
 
-# %%
+# %% execution={"iopub.execute_input": "2020-05-18T02:47:33.906Z", "iopub.status.busy": "2020-05-18T02:47:33.872Z", "iopub.status.idle": "2020-05-18T02:47:33.959Z", "shell.execute_reply": "2020-05-18T02:47:33.783Z"}
 # set a splitting point
 split_point = 3
 
 # make two empty lists
-lower = []
-upper = []
+lower = []; upper = []
 
 # Split numbers from 0 to 9 into two groups, one lower or equal to the split point and one higher than the split point
 for i in range(10):  # count from 0 to 9
@@ -74,8 +86,7 @@ split_point = 3
 # The next piece of code initializes two **lists**, named `lower` and `upper`.
 
 # %%
-lower = []
-upper = []
+lower = []; upper = []
 
 # %% [markdown]
 # The semi-colon tells Python that, even though written on the same line, a particular instruction ends at the semi-colon, then another piece of instruction is written.
@@ -128,7 +139,7 @@ print("upper:", upper)
 #
 # 1. Comments are marked by `#`
 # 2. A statement is terminated by the end of a line, or by a `;`.
-# 3. Indentation specifies blocks of code within particular structures. Whitespace at the beginning of lines matters. Typically you want to have 2 or 4 spaces to specify indentation, not a tab (\t) character. This can be set up in your IDE
+# 3. Indentation specifies blocks of code within particular structures. Whitespace at the beginning of lines matters. Typically you want to have 2 or 4 spaces to specify indentation, not a tab (\t) character. This can be set up in your IDE.
 # 4. Whitespace within lines does not matter, so you can use spaces liberally to make your code more readable
 # 5. Parentheses (`()`) are for grouping pieces of code or for calling functions.
 #
@@ -137,7 +148,8 @@ print("upper:", upper)
 # ## Data types in Python
 #
 # We start with objects in Python. Objects can be of different types, including numbers (integers and floats), strings, arrays (vectors and matrices) and others. Any object can be assigned to a name, so that we can refer to the object in our code. We'll start with the basic types of objects.
-#
+
+# %% [markdown]
 # ### Numeric variables
 #
 # The following is a line of Python code, where we assign the value 1.2 to the variable `a`.
@@ -158,7 +170,7 @@ type(a)
 
 # %%
 x = 0.0005
-y = 5e-4
+y = 5e-4 # 5 x 10^(-4)
 print(x == y)
 
 # %% [markdown]
@@ -203,9 +215,6 @@ x / y
 # %%
 x ** y
 # %% [markdown]
-#
-
-# %% [markdown]
 # ### Strings
 #
 # Strings are how text is represented within Python. It is always represented as a quoted object using either single (`''`) or double (`""`) quotes, as long as the types of quotes are matched. For example:
@@ -243,8 +252,11 @@ last_name = "Dasgupta"
 "gup" in last_name
 
 # %% [markdown]
-# There are several *functions* that apply to strings, that we will look at throughout the workshop, and especially when we look at string manipulation.
+# String manipulation is one of the strong suites of Python. 
+# There are several *functions* that apply to strings, that we will look at throughout the workshop, and especially when we look at string manipulation. In particular, there are built-in functions in base Python and powerful *regular expression* capabilities in the `re` module.
 #
+
+# %% [markdown]
 # ### Truthiness
 #
 # Truthiness means evaluating the truth of a statement. This typically results in a Boolean object, which can take values `True` and `False`, but Python has several equivalent representations. The following values are considered the same as False:
@@ -253,6 +265,8 @@ last_name = "Dasgupta"
 #
 # All other values are considered True. Usually we'll denote truth by `True` and the number `1`.
 #
+
+# %% [markdown]
 # #### Operations
 #
 # We will typically test for the truth of some comparisons. For example, if we have two numbers stored in `x` and `y`, then we can perform the following comparisons
@@ -275,12 +289,10 @@ last_name = "Dasgupta"
 # | not x     | if x is true, then false, and vice versa |
 #
 # For example, if we have a number stored in `x`, and want to find out if it is between 3 and 7, we could write
+# <!-- #endregion -->
 
 # %%
 (x >= 3) & (x <= 7)
-# %% [markdown]
-#
-
 # %% [markdown]
 # #### A note about variables and types
 #
@@ -301,7 +313,7 @@ x = 3.5  # A float
 x = "That's my mother"  # A str
 x = True  # A bool
 # %% [markdown]
-#
+# > Variables are like individual ingredients in your recipe. It's *mis en place* or setting the table for any operations (*functions*) we want to do to them. In a language context, variables are like *nouns*, which will be acted on by verbs (*functions*). In the next section we'll look at collections of variables. These collections are important in that it allows us to organize our variables with some structure. 
 
 # %% [markdown]
 # ## Data structures in Python
@@ -311,6 +323,8 @@ x = True  # A bool
 # 1. Lists (`[]`)
 # 2. Tuples (`()`)
 # 3. Dictionaries or dicts (`{}`)
+#
+# Note that there are three different kinds of brackets being used. 
 #
 # Lists are baskets that can contain different kinds of things. They  are ordered, so that there is a first element, and a second element, and a last element, in order. However, the *kinds* of things in a single list doesn't have to be the same type.
 #
@@ -341,7 +355,7 @@ test_list[0]
 # >
 # > Yup. Python is based deep underneath on the C language, where counting starts at 0. So the first element has index 0, second has index 1, and so on. So you need to be careful if you're used to counting from 1, or, if you're used to R, which does start counting at 1.
 #
-# We can also extract a set of consecutive elements from a list, which is often convenient. The typical form is to write the index as `a:b`. The (somewhat confusing) rule is that `a:b` means that you start at index `a`, but continue until **before index `b`**. So the notation `2:5` means include elements with index 2, 3, and 4.
+# We can also extract a set of consecutive elements from a list, which is often convenient. The typical form is to write the index as `a:b`. The (somewhat confusing) rule is that `a:b` means that you start at index `a`, but continue until **before index `b`**. So the notation `2:5` means include elements with index 2, 3, and 4. In the Python world, this is called **slicing**.
 
 # %%
 test_list[2:5]
@@ -358,13 +372,23 @@ test_list[2:]
 # %% [markdown]
 # The important thing here is if you provide an index `a:b`, then `a` is include but `b` __is not__.
 #
-# You can also count **backwards** from the end. The last element in a Python list has index `-1`. So
+# You can also count **backwards** from the end. The last element in a Python list has index `-1`. 
+#
+# |                    |         |      |      |          |       |
+# | ------------------ | ------- | ---- | ---- | -------- | ----- |
+# | index              | 0       | 1    | 2    | 3        | 4     |
+# | element            | 'apple' | 3    | True | 'Harvey' | 48205 |
+# | counting backwards | -5      | -4   | -3   | -2       | -1    |
+#
+#
 
 # %%
 test_list[-1]
 
 # %% [markdown]
 # You can also use negative indices to denote sequences within the list, with the same indexing rule applying. Note that you count from the last element (-1) and go backwards.
+#
+#
 
 # %%
 test_list[:-1]
@@ -391,10 +415,21 @@ test_nested_list
 "Harvey" in test_list
 
 # %% [markdown]
+# > Lists have the following properties
+# > 
+# >   - They can be heterogenous (each element can be a different type)
+# >   - Lists can hold complex objects (lists, dicts, other objects) in addition to atomic objects (single numbers or words)
+# >   - List have an ordering, so you can access list elements by position
+# >   - List access can be done counting from the beginning or the end, and consecutive elements can be extracted using slices.
+#
+
+# %% [markdown]
 # ### Tuples
 
 # %% [markdown]
 # Tuples are like lists, except that once you create them, you can't change them. This is why tuples are great if you want to store fixed parameters or entities within your Python code, since they can't be over-written even by mistake. You can extract elements of a tuple, but you can't over-write them. This is called *immutable*.
+#
+# Note that, like lists, tuples can be heterogenous, which is also useful for coding purposes, as we will see. 
 
 # %%
 test_tuple = ("apple", 3, True, "Harvey", 48205)
@@ -414,6 +449,9 @@ test_tuple[0] = "pear"
 test_tuple
 
 # %% [markdown]
+# > Tuples are like lists, but once created, they cannot be changed. They are ordered and can be sliced. 
+
+# %% [markdown]
 # ### Dictionaries
 #
 # Dictionaries, or `dict`, are collections of key-value pairs. Each element is referred to by *key*, not by *index*. In a dictionary, the keys can be strings, numbers or tuples, but the values can be any Python object. So you could have a dictionary where one value is a string, another is a number and a third is a DataFrame (essentially a data set, using the pandas library). A simple example might be an entry in a list of contacts
@@ -426,6 +464,9 @@ contact = {
     "address": "124 Main St",
     "Employed": True,
 }
+
+# %% [markdown]
+# Note the special syntax. You separate the key-value pairs by colons (`:`), and each key-value pair is separated by commas. If you get a syntax error creating a dict, look at these first. 
 
 # %% [markdown]
 # If you try to get the first name out using an index, you run into an error:
@@ -461,6 +502,27 @@ contact.values()
 #
 # We'll see that dictionaries are also one way to easily create pandas DataFrame objects on the fly.
 #
+# There are a couple of other ways to create dict objects. One is using a list of tuples. Each key-value pair is represented by a tuple of length 2, where the 1st element is the key and the second element is the value. 
+
+# %%
+A = [('first_name','Abhijit'),('last_name','Dasgupta'),('address', '124 Main St')]
+dict(A)
+
+# %% [markdown]
+# This actually can be utilized to create a dict from a pair of lists. There is a really neat function, `zip`, that inputs several lists of the same length and creates a list of tuples, where the i-th element of each tuple comes from the i-th list, in order.
+
+# %%
+A = ['first_name', 'last_name','address']
+B = ['Abhijit','Dasgupta','124 Main St']
+dict(zip(A, B))
+
+# %% [markdown]
+# > The `zip` function is quite powerful in putting several lists together with corresponding elements of each list into a tuple
+
+# %% [markdown]
+# On a side note, there is a function `defaultdict` from the `collections` module that is probably better to use. We'll come back to it when we talk about modules. 
+
+# %% [markdown]
 # ## Operational structures in Python
 #
 # ### Loops and list comprehensions
@@ -480,7 +542,7 @@ contact.values()
 #
 # The basic idea of a list is that there is a list of things you want to iterate over. You create a dummy variable as stand-in for each element of that list. Then you create a for-loop. This works like a conveyor belt and basket, so to speak. You line up elements of the list on the conveyor belt, and as you run the loop, one element of the list is "scooped up" and processed. Once that processing is done, the next element is "scooped up", and so forth. The dummy variable is essentially the basket (so the same basket (variable name) is re-used over and over until the conveyor belt (list) is empty).
 #
-# In the examples below, we are showing a common use of for loops where we are enumerating the elements of a list as 0, 1, 2, ... using `range(len(test_list))`. So the dummy variable `i` takes values 0, 1, 2, ... until the length of the list is reached. For each value of `i`, this for loop prints the i^th^ element of `test_list`.
+# In the examples below, we are showing a common use of for loops where we are enumerating the elements of a list as 0, 1, 2, ... using `range(len(test_list))`. So the dummy variable `i` takes values 0, 1, 2, ... until the length of the list is reached. For each value of `i`, this for loop prints the i-th element of `test_list`.
 
 # %%
 for i in range(len(test_list)):
@@ -495,7 +557,7 @@ for u in test_list:
 
 # %% [markdown]
 # > The general structure for a `for` loop is:
-#
+# >
 # >```python
 # >for (element) in (list):
 # >    	do some stuff
@@ -550,7 +612,9 @@ list(range(0, 10, 2))  # range from 0 to 10 by 2
 # %% [markdown]
 # Note the rules here are very much like the slicing rules.
 #
-# Other iterators that are often useful are the `enumerate` iterator and the `zip` iterator.  `enumerate` automatically creates both the index and the value for each element of a list
+# Other iterators that are often useful are the `enumerate` iterator and the `zip` iterator. 
+#
+# `enumerate` automatically creates both the index and the value for each element of a list.
 
 # %%
 L = [0, 2, 4, 6, 8]
@@ -558,14 +622,17 @@ for i, val in enumerate(L):
     print(i, val)
 
 # %% [markdown]
-# `zip` puts multiple lists together and creates a composite iterator. You can have any number of iterators in zip, and the length of the result is determined by the length of the shortest iterator
+# `zip` puts multiple lists together and creates a composite iterator. You can have any number of iterators in zip, and the length of the result is determined by the length of the shortest iterator. We introduced an example of `zip` as a way to create a `dict`. 
+#
+# > Technically, `zip` can take multiple *iterators* as inputs, not just lists
 
 # %%
 first = ["Han", "Luke", "Leia", "Anakin"]
 last = ["Solo", "Skywalker", "Skywaker", "Skywalker"]
+type = ['light','light','light','light/dark/light']
 
-for lval, rval in zip(first, last):
-    print(lval, rval)
+for val1, val2, val3 in zip(first, last, type):
+    print(val1, val2, ' : ', val3)
 
 
 # %% [markdown]
@@ -582,7 +649,7 @@ for lval, rval in zip(first, last):
 x = list(range(10))
 
 for u in x:
-    if u % 2 == 1:
+    if u % 2 == 1: # If u / 2 gives a remainder of 1
         continue
     if u >= 8:
         break
@@ -609,6 +676,14 @@ squares
 # %% [markdown]
 # **Exercise:** Can you use a list comprehension to find out the types of each element of the `contact` dict?
 #
+
+# %% [markdown]
+# We can also use list comprehensions to extract arbitrary sets of elements of lists
+
+# %%
+test = ['a','b','c','d','e','f','g']
+test1 = [test[i] for i in [0,2,3,5]]
+test1
 
 # %% [markdown]
 # ### Conditional evaluations
@@ -646,7 +721,7 @@ print(y)
 
 
 # %% [markdown]
-# Note here that the indentation (leading whitespace) is crucial to this structure. The if-elif-else structure is embedded in a for-loop, so the entire structure in indented. Also, each particular recipe is also indented within the if-elif-else structure.
+# Note here that the indentation (leading whitespace) is crucial to this structure. The `if-elif-else` structure is embedded in a for-loop, so the entire structure in indented. Also, each particular recipe is also indented within the if-elif-else structure.
 #
 # > The `elif` is optional, in that if you have only 2 conditions, then an `if-else` structure is sufficient. However, you can have multiple `elif`'s if you have more conditions. This kind of structure has to start with an `if`, end with an `else` and can have 0 or more `elif` in the middle.
 #
@@ -662,14 +737,18 @@ print(y)
 def my_mean(x):
     y = 0
     for u in x:
-        y = y + u
+        y += u 
     y = y / len(x)
     return y
 
 
 # %% [markdown]
 # This takes a list of numbers `x`, loops over the elements of `x` to find their sum, and then divides by the length of `x` to compute the mean. It then returns this mean.
-#
+
+# %% [markdown]
+# > The notation `+=` is a shortcut often used in programming. The statement `y += u` means, take the current value of `y`, add the value of `u` to it, and store it back in to `y`. This is a shorthand for `y = y + u`. In analogous fashion, you can use `-=`, `*=` and `/=` to do subtraction, multiplication and division respectively.
+
+# %% [markdown]
 # A Python function must start with the keyword `def` followed by the name of the function, the arguments within parentheses, and then a colon. The actual code for the function is indented, just like in for-loops and if-elif-else structures. It ends with a `return` function which specifies the output of the function.
 #
 # To use the `my_mean` function,
@@ -682,7 +761,7 @@ my_mean(x)
 # %% [markdown]
 # ### Documenting your functions
 #
-# Python has an in-built documentation system that allows you to readily document your functions using *docstrings*. Basically, right after the first line with `def`, you can create a (multi-line) string that documents the function and will be printed if the help system is used for that function. You can create a multi-line string by bounding it with 3 quotation marks on each side. For example,
+# Python has an in-built documentation system that allows you to readily document your functions using *docstrings*. Basically, right after the first line with `def`, you can create a (multi-line) string that documents the function and will be printed if the help system is used for that function. You can create a multi-line string by **bounding it with 3 quotation marks on each side**. For example,
 
 # %%
 def my_mean(x):
@@ -700,8 +779,8 @@ def my_mean(x):
         y = y + u
     y = y / len(x)
     return y
-# %% [markdown]
-#
+# %%
+help(my_mean)
 
 # %% [markdown]
 # ## Modules and Packages
@@ -741,6 +820,27 @@ from math import pi, sin, cos
 
 print(sin(pi))
 print(cos(pi))
+
+# %% [markdown]
+# We had made reference to the `defaultdict` function from the `collections` module before. Using this instead of `dict` can be advantagous sometimes in data scientific work.
+
+# %%
+from collections import defaultdict
+
+A = defaultdict(list) # Specify each component will be a list
+B = {}
+
+s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('red', 1)]
+for k,v in s: # k = key, v = value
+    B[k].append(v)
+
+# %%
+for k,v in s:
+    A[k].append(v)
+A
+
+# %% [markdown]
+# The `defaultdict` sees a new key, and adds it to the dict, initializing it with an empty list (since we specified `defaultdict(list)`. The normal dict requires the key to already be in place in the dict for any operations to take place on that key-value pair. So the `default` dict is safer for on-the-fly work and when we don't know beforehand what keys we will encounter when storing data into the dict. 
 
 # %% [markdown]
 # > There is a temptation to use this method to import everything in a module so you don't have to specify the module. This is a **bad practice** generally, both because you clutter up the namespace that Python reads from, and because you may unknowingly over-write and replace a function from one module with one from another module, and you will have a hard time debugging your code.
@@ -869,6 +969,8 @@ print(cos(pi))
 #
 # where the first line of the `environment.yml` file creates the environment name.
 #
+# You can also create the environment from an `environment.yml` file from Anaconda Navigator by using the Import button rather than the Create button in the instructions above. 
+#
 # > If you are changing operating systems, create the `environment.yml` file using the command
 # >
 # > ```shell
@@ -876,8 +978,9 @@ print(cos(pi))
 # > ```
 # >
 # > This avoids potential issues with dependencies that may not be compatible across operating systems
-#
-# ##Seeking help
+
+# %% [markdown]
+# ## Seeking help
 #
 # Most Python functions have some amount of documentation. As we saw when we created our own function, this documentation is part of the function definition. It can be accessed at the Python console in 2 ways:
 
