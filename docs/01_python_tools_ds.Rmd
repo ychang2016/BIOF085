@@ -13,6 +13,11 @@ jupyter:
     name: python3
 ---
 
+<!-- #region toc=true -->
+<h1>Table of Contents<span class="tocSkip"></span></h1>
+<div class="toc"><ul class="toc-item"><li><span><a href="#The-PyData-Stack" data-toc-modified-id="The-PyData-Stack-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>The PyData Stack</a></span></li><li><span><a href="#Numpy-(numerical-and-scientific-computing)" data-toc-modified-id="Numpy-(numerical-and-scientific-computing)-2"><span class="toc-item-num">2&nbsp;&nbsp;</span>Numpy (numerical and scientific computing)</a></span><ul class="toc-item"><li><span><a href="#Numpy-data-types" data-toc-modified-id="Numpy-data-types-2.1"><span class="toc-item-num">2.1&nbsp;&nbsp;</span>Numpy data types</a></span></li><li><span><a href="#Generating-data-in-numpy" data-toc-modified-id="Generating-data-in-numpy-2.2"><span class="toc-item-num">2.2&nbsp;&nbsp;</span>Generating data in numpy</a></span><ul class="toc-item"><li><span><a href="#Random-numbers" data-toc-modified-id="Random-numbers-2.2.1"><span class="toc-item-num">2.2.1&nbsp;&nbsp;</span>Random numbers</a></span></li></ul></li><li><span><a href="#Vectors-and-matrices" data-toc-modified-id="Vectors-and-matrices-2.3"><span class="toc-item-num">2.3&nbsp;&nbsp;</span>Vectors and matrices</a></span></li><li><span><a href="#Extracting-elements-from-arrays" data-toc-modified-id="Extracting-elements-from-arrays-2.4"><span class="toc-item-num">2.4&nbsp;&nbsp;</span>Extracting elements from arrays</a></span></li><li><span><a href="#Beware-of-copies" data-toc-modified-id="Beware-of-copies-2.5"><span class="toc-item-num">2.5&nbsp;&nbsp;</span>Beware of copies</a></span></li><li><span><a href="#Operations-on-matrices" data-toc-modified-id="Operations-on-matrices-2.6"><span class="toc-item-num">2.6&nbsp;&nbsp;</span>Operations on matrices</a></span><ul class="toc-item"><li><span><a href="#Logical/Boolean-operations" data-toc-modified-id="Logical/Boolean-operations-2.6.1"><span class="toc-item-num">2.6.1&nbsp;&nbsp;</span>Logical/Boolean operations</a></span></li></ul></li><li><span><a href="#Broadcasting-in-Python" data-toc-modified-id="Broadcasting-in-Python-2.7"><span class="toc-item-num">2.7&nbsp;&nbsp;</span>Broadcasting in Python</a></span><ul class="toc-item"><li><span><a href="#An-example-(optional)" data-toc-modified-id="An-example-(optional)-2.7.1"><span class="toc-item-num">2.7.1&nbsp;&nbsp;</span>An example (optional)</a></span></li></ul></li><li><span><a href="#Conclusions-moving-forward" data-toc-modified-id="Conclusions-moving-forward-2.8"><span class="toc-item-num">2.8&nbsp;&nbsp;</span>Conclusions moving forward</a></span></li></ul></li></ul></div>
+<!-- #endregion -->
+
 # Python tools for data science
 
 ## The PyData Stack
@@ -45,13 +50,13 @@ We may also introduce the package `rpy2` which allows one to run R from within P
 
 We start by importing the Numpy package into Python using the alias `np`. 
 
-```python
+```{python}
 import numpy as np
 ```
 
 Numpy provides both arrays (vectors) and vectorized functions which are very fast. Let's see how this works.
 
-```python
+```{python}
 z = [1,2,3,4,5,6,7,8,9.3,10.6] # This is a list
 z_array = np.array(z)
 z_array
@@ -59,17 +64,21 @@ z_array
 
 Now, we have already seen functions in Python earlier. In Numpy, there are functions that are optimized for arrays, that can be accessed directly from the array objects. This is an example of *object-oriented programming* in Python, where functions are provided for particular *classes* of objects, and which can be directly accessed from the objects. We will use several such functions over the course of this workshop, but we won't actually talk about how to do this program development here. 
 
+
+> Numpy functions are often very fast, and are *vectorized*, i.e., they are written to work on vectors of numbers rather than single numbers. This is an advantage in data science since we often want to do the same operation to all elements of a column of data, which is essentially a vector
+
+
 We apply the functions `sum`, `min` (minimum value) and `max` (maximum value) to `z_array`. 
 
-```python
+```{python}
 z_array.sum()
 ```
 
-```python
+```{python}
 z_array.min()
 ```
 
-```python
+```{python}
 z_array.max()
 ```
 
@@ -77,7 +86,7 @@ The versions of these functions in Numpy are optimized for arrays and are quite 
 
 These functions can also be used in the usual function manner:
 
-```python
+```{python}
 np.max(z_array)
 ```
 
@@ -87,7 +96,7 @@ Calling `np.max` ensures that we are using the `max` function from numpy, and no
 
 Numpy arrays are homogeneous in type
 
-```python
+```{python}
 y = [1,3,'a']
 np.array(y)
 ```
@@ -96,40 +105,53 @@ So what's going on here? Upon conversion from a heterogeneous list, numpy conver
 
 ### Generating data in numpy
 
-We had seen earlier how we could generate a sequence of numbers in a list using `range`. In numpy, you can generate a sequence of numbers in an array using `arange`
+We had seen earlier how we could generate a sequence of numbers in a list using `range`. In numpy, you can generate a sequence of numbers in an array using `arange` (which actually creates the array rather than provide an iterator like `range`).
 
-```python
+```{python}
 np.arange(10)
 ```
 
 You can also generate regularly spaced sequences of numbers between particular values
 
-```python
+```{python}
 np.linspace(start=0, stop=1, num=11) # or np.linspace(0, 1, 11)
 ```
 
 You can generate an array of 0's
 
-```python
+```{python}
 np.zeros(10)
 ```
 
 This can easily be extended to a two-dimensional array (a matrix), by specifying the dimension of the matrix as a tuple. 
 
-```python
+```{python}
 np.zeros((10,10))
 ```
 
 You can also generate a matrix of 1s in a similar manner.
 
-```python
+```{python}
 np.ones((3,4))
 ```
 
 In matrix algebra, the identity matrix is important. It is a square matrix with 1's on the diagonal and 0's everywhere else. 
 
-```python
+```{python}
 np.eye(4)
+```
+
+You can also create numpy vectors directly from lists, as long as lists are made up of atomic elements of the same type. This means a list of numbers or a list of strings. The elements can't be more composite structures, generally. One exception is a list of lists, where all the lists contain the same type of atomic data, which, as we will see, can be used to create a matrix or 2-dimensional array.
+
+```{python}
+a = [1,2,3,4,5,6,7,8]
+b = ['a','b','c','d','3']
+
+np.array(a)
+```
+
+```{python}
+np.array(b)
 ```
 
 #### Random numbers
@@ -138,7 +160,7 @@ Generating random numbers is quite useful in many areas of data science. All com
 
 The seed is set by the `RandomState` function within the `random` submodule of numpy. Note that all Python names are case-sensitive. 
 
-```python
+```{python}
 rng = np.random.RandomState(35) # set seed
 rng.randint(0, 10, (3,4))
 ```
@@ -147,7 +169,7 @@ We have created a 3x4 matrix of random integers between 0 and 10 (in line with s
 
 We can also create a random sample of numbers between 0 and 1. 
 
-```python
+```{python}
 rng.random_sample((5,2))
 ```
 
@@ -159,32 +181,32 @@ Numpy generates arrays, which can be of arbitrary dimension. However the most us
 
 In these examples, we will generate samples from the Normal (Gaussian) distribution, with mean 0 and variance 1. 
 
-```python
+```{python}
 A = rng.normal(0,1,(4,5))
 ```
 
 We can compute some characteristics of this matrix's dimensions. The number of rows and columns are given by `shape`. 
 
-```python
+```{python}
 A.shape
 ```
 
 The total number of elements are given by `size`. 
 
-```python
+```{python}
 A.size
 ```
 
 If we want to create a matrix of 0's with the same dimensions as `A`, we don't actually have to compute its dimensions. We can use the `zeros_like` function to figure it out.
 
-```python
+```{python}
 np.zeros_like(A)
 ```
 
 We can also create vectors by only providing the number of rows to the random sampling function. The number of columns will be assumed to be 1. 
 
-```python
-B = rng.normal(0, 1, (5,))
+```{python}
+B = rng.normal(0, 1, (4,))
 B
 ```
 
@@ -203,25 +225,25 @@ B[[0,2,5]]
 
 For matrices, we have two dimensions, so you can slice by rows, or columns or both. 
 
-```python
+```{python}
 A
 ```
 
 We can extract the first column by specifying `:` (meaning everything) for the rows, and the index for the column (reminder, Python starts counting at 0)
 
-```python
+```{python}
 A[:,0]
 ```
 
 Similarly the 4th row can be extracted by putting the row index, and `:` for the column index. 
 
-```python
+```{python}
 A[3,:]
 ```
 
 All slicing operations work for rows and columns
 
-```python
+```{python}
 A[:2,:2]
 ```
 
@@ -229,11 +251,11 @@ A[:2,:2]
 
 One has to be a bit careful with copying objects in Python. By default, if you just assign one object to a new name, it does a *shallow copy*, which means that both names point to the same memory. So if you change something in the original, it also changes in the new copy. 
 
-```python
+```{python}
 A[0,:]
 ```
 
-```python
+```{python}
 A1 = A
 A1[0,0] = 4
 A[0,0]
@@ -241,7 +263,7 @@ A[0,0]
 
 To actually create a copy that is not linked back to the original, you have to make a *deep copy*, which creates a new space in memory and a new pointer, and copies the original object to the new memory location
 
-```python
+```{python}
 A1 = A.copy()
 A1[0,0] = 6
 A[0,0]
@@ -249,8 +271,8 @@ A[0,0]
 
 You can also replace sub-matrices of a matrix with new data, provided that the dimensions are compatible. (Make sure that the sub-matrix we are replacing below truly has 2 rows and 2 columns, which is what `np.eye(2)` will produce)
 
-```python
-A[:2,:2] = numpy.eye(2)
+```{python}
+A[:2,:2] = np.eye(2)
 A
 ```
 
@@ -258,20 +280,20 @@ A
 
 You can sum all the elements of a matrix using `sum`. You can also sum along rows or along columns by adding an argument to the `sum` function. 
 
-```python
+```{python}
 A = rng.normal(0, 1, (4,2))
 A.sum()
 ```
 
 You can sum along rows with the option `axis = 0`
 
-```python
+```{python}
 A.sum(axis=0)
 ```
 
 You can sum along columns with `axis = 1`.
 
-```python
+```{python}
 A.sum(axis=1)
 ```
 
@@ -281,7 +303,7 @@ A.sum(axis=1)
 
 You can query a matrix to see which elements meet some criterion. In this example, we'll see which elements are negative.
 
-```python
+```{python}
 A < 0
 ```
 
@@ -289,19 +311,19 @@ This is called **masking**, and is useful in many contexts.
 
 We can extract all the negative elements of A using
 
-```python
+```{python}
 A[A<0]
 ```
 
 This forms a 1-d array. You can also count the number of elements that meet the criterion
 
-```python
+```{python}
 np.sum(A<0)
 ```
 
 Since the entity `A<0` is a matrix as well, we can do row-wise and column-wise operations as well. 
 
-## Broadcasting in Python
+### Broadcasting in Python
 
 
 Python deals with arrays in an interesting way, in terms of matching up dimensions of arrays for arithmetic operations. There are 3 rules:
@@ -310,90 +332,108 @@ Python deals with arrays in an interesting way, in terms of matching up dimensio
 2. If the shape doesn't match in any dimension, the array with shape = 1 in that dimension is stretched to match the others' shape
 3. If in any dimension the sizes disagree and none of the sizes are 1, then an error is generated
 
-```python
+```{python}
+A = rng.normal(0,1,(4,5))
+B = rng.normal(0,1,5)
+```
+
+```{python}
 A.shape
 ```
 
-```python
+```{python}
 B.shape
 ```
 
-```python
+```{python}
 A - B
 ```
 
 B is 1-d, A is 2-d, so B's shape is made into (1,5) (added to the left). Then it is repeated into 4 rows to make it's shape (4,5), then the operation is performed. This means that we subtract the first element of B from the first column of A, the second element of B from the second column of A, and so on.
 
+
+You can be explicit about adding dimensions for broadcasting by using `np.newaxis`.
+
+```{python}
+B[np.newaxis,:].shape
+```
+
+```{python}
+B[:,np.newaxis].shape
+```
+
+#### An example (optional)
+
 This can be very useful, since these operations are faster than for loops. For example:
 
-```python
+```{python}
 d = rng.random_sample((10,2))
 d
 ```
 
 We want to find the Euclidean distance (the sum of squared differences) between the points defined by the rows. This should result in a 10x10 distance matrix
 
-```python
+```{python}
 d.shape
 ```
 
-```python
+```{python}
 d[np.newaxis,:,:]
 ```
 
 creates a 3-d array with the first dimension being of length 1
 
-```python
+```{python}
 d[np.newaxis,:,:].shape
 ```
 
-```python
+```{python}
 d[:, np.newaxis,:]
 ```
 
 creates a 3-d array with the 2nd dimension being of length 1
 
-```python
+```{python}
 d[:,np.newaxis,:].shape
 ```
 
 Now for the trick, using broadcasting of arrays. These two arrays are incompatible without broadcasting, but with broadcasting, the right things get repeated to make things compatible
 
-```python
+```{python}
 dist_sq = np.sum((d[:,np.newaxis,:] - d[np.newaxis,:,:]) ** 2)
 ```
 
-```python
+```{python}
 dist_sq.shape
 ```
 
-```python
+```{python}
 dist_sq
 ```
 
 Whoops! we wanted a 10x10 matrix, not a scalar. 
 
-```python
+```{python}
 (d[:,np.newaxis,:] - d[np.newaxis,:,:]).shape
 ```
 
 What we really want is the 10x10 distance matrix. 
 
-```python
+```{python}
 dist_sq = np.sum((d[:,np.newaxis,:] - d[np.newaxis,:,:]) ** 2, axis=2)
 ```
 
 You can verify what is happening by creating `D = d[:,np.newaxis,:]-d[np.newaxis,:,:]` and then looking at `D[:,:,0]` and `D[:,:,1]`. These are the difference between each combination in the first and second columns of d, respectively. Squaring and summing along the 3rd axis then gives the sum of squared differences. 
 
-```python
+```{python}
 dist_sq
 ```
 
-```python
+```{python}
 dist_sq.shape
 ```
 
-```python
+```{python}
 dist_sq.diagonal()
 ```
 
